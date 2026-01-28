@@ -8,80 +8,80 @@ import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/comp
 const pricingData = {
   plans: [
     {
-      name: "Старт",
-      description: "Для начинающих и небольших команд.",
+      name: "Базовый",
+      description: "Для квартир и небольших помещений.",
       features: [
         {
-          name: "Базовое управление задачами",
-          tooltip: "Основные функции для начала работы",
+          name: "Обработка до 50 м²",
+          tooltip: "Подходит для однокомнатных квартир",
         },
         {
-          name: "1 автоматизация на процесс",
-          tooltip: "Автоматизируйте одну задачу в каждом процессе",
+          name: "Безопасные препараты",
+          tooltip: "Сертифицированные средства",
         },
         {
-          name: "5 ГБ хранилище",
-          tooltip: "Безопасное хранение файлов и документов",
+          name: "Выезд в течение 24 ч",
+          tooltip: "Быстрый выезд специалиста",
+        },
+      ],
+      pricing: {
+        monthly: 3500,
+        annually: 3500,
+      },
+      variant: "secondary",
+    },
+    {
+      name: "Стандарт",
+      description: "Для офисов и коммерческих помещений.",
+      badge: "Популярный",
+      features: [
+        {
+          name: "Обработка до 150 м²",
+          tooltip: "Подходит для офисов и магазинов",
+        },
+        {
+          name: "Усиленная защита",
+          tooltip: "Профессиональные препараты",
+        },
+        {
+          name: "Выезд в течение 6 ч",
+          tooltip: "Приоритетный выезд",
+        },
+        {
+          name: "Документы о проведении",
+          tooltip: "Полный пакет документов",
+        },
+      ],
+      pricing: {
+        monthly: 8500,
+        annually: 8500,
+      },
+      variant: "default",
+    },
+    {
+      name: "Премиум",
+      description: "Для складов и производств.",
+      features: [
+        {
+          name: "Обработка от 300 м²",
+          tooltip: "Для больших площадей",
+        },
+        {
+          name: "Профессиональное оборудование",
+          tooltip: "Современные генераторы и распылители",
+        },
+        {
+          name: "Срочный выезд 2-4 ч",
+          tooltip: "Экстренный выезд бригады",
+        },
+        {
+          name: "Лабораторный контроль",
+          tooltip: "Проверка эффективности обработки",
         },
       ],
       pricing: {
         monthly: 0,
         annually: 0,
-      },
-      variant: "secondary",
-    },
-    {
-      name: "Про",
-      description: "Для растущих команд, готовых масштабироваться.",
-      badge: "Популярный",
-      features: [
-        {
-          name: "Неограниченные доски",
-          tooltip: "Создавайте столько досок, сколько нужно",
-        },
-        {
-          name: "Продвинутая автоматизация",
-          tooltip: "Мощные возможности для сложных процессов",
-        },
-        {
-          name: "50 ГБ хранилище",
-          tooltip: "Расширенное хранилище для растущих команд",
-        },
-        {
-          name: "Интеграции",
-          tooltip: "Подключение любимых инструментов",
-        },
-      ],
-      pricing: {
-        monthly: 2900,
-        annually: 29000,
-      },
-      variant: "default",
-    },
-    {
-      name: "Бизнес",
-      description: "Для крупных организаций с особыми потребностями.",
-      features: [
-        {
-          name: "Персональная поддержка",
-          tooltip: "Приоритетная поддержка с персональным менеджером",
-        },
-        {
-          name: "Кастомные процессы",
-          tooltip: "Создавайте процессы под ваши задачи",
-        },
-        {
-          name: "150 ГБ хранилище",
-          tooltip: "Корпоративное хранилище данных",
-        },
-        {
-          name: "Расширенная безопасность",
-          tooltip: "Продвинутые функции защиты и контроля",
-        },
-      ],
-      pricing: {
-        monthly: 12900,
-        annually: 129000,
       },
       variant: "secondary",
     },
@@ -98,27 +98,12 @@ export function PricingSection4() {
           <div className="flex flex-col items-center gap-4 md:gap-5 max-w-xl text-center">
             <p className="text-base font-semibold text-muted-foreground">Тарифы</p>
             <h2 id="pricing-section-title-4" className="text-3xl md:text-4xl font-bold">
-              Простые и понятные цены
+              Цены на услуги
             </h2>
-            <p className="text-base text-muted-foreground">Выберите план, который подходит вашей команде.</p>
+            <p className="text-base text-muted-foreground">Выберите пакет для вашего объекта</p>
           </div>
 
-          <Tabs value={billingPeriod} onValueChange={setBillingPeriod} className="w-fit">
-            <TabsList className="bg-black/30 h-10 p-1 rounded-[40px]">
-              <TabsTrigger
-                value="monthly"
-                className="rounded-full px-3 py-1.5 data-[state=active]:bg-background data-[state=active]:shadow-sm"
-              >
-                Ежемесячно
-              </TabsTrigger>
-              <TabsTrigger
-                value="annually"
-                className="rounded-full px-3 py-1.5 data-[state=active]:bg-background data-[state=active]:shadow-sm"
-              >
-                Ежегодно
-              </TabsTrigger>
-            </TabsList>
-          </Tabs>
+
 
           <div className="flex flex-col lg:flex-row gap-6 lg:max-w-5xl w-full mx-auto">
             {pricingData.plans.map((plan, index) => (
@@ -133,21 +118,18 @@ export function PricingSection4() {
 
                   <div className="flex items-end gap-0.5">
                     <span className="text-4xl font-semibold leading-10">
-                      {billingPeriod === "monthly" ? plan.pricing.monthly : plan.pricing.annually}
-                    </span>
-                    <span className={`text-base leading-6 ${index === 2 ? "opacity-70" : "text-muted-foreground"}`}>
-                      {plan.pricing.monthly === 0 ? "" : ` р/${billingPeriod === "monthly" ? "мес" : "год"}`}
+                      {plan.pricing.monthly === 0 ? 'По запросу' : `${plan.pricing.monthly} р`}
                     </span>
                   </div>
 
                   <Button variant={index === 2 ? "secondary" : "default"} className="w-full">
-                    {plan.pricing.monthly === 0 ? "Начать бесплатно" : "Выбрать"}
+                    {plan.pricing.monthly === 0 ? "Получить консультацию" : "Заказать"}
                   </Button>
                 </div>
 
                 <div className="space-y-4">
                   <p className="text-sm font-medium">
-                    {index === 0 ? "Что включено:" : `Все из ${pricingData.plans[index - 1].name}, плюс:`}
+                    Что включено:
                   </p>
                   <div className="flex flex-col gap-4">
                     {plan.features.map((feature, i) => (
